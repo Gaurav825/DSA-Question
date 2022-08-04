@@ -1,0 +1,41 @@
+/* A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+*/
+// using bfs algorithm we check that the binary tree is full binary tree let us look steps used in that algorithm 
+/*
+step1.check if there is right subtree and left subtree is empty than return false 
+step 2.there is no right subtree and have only left subtree so check if there is left->left->left if present return false and there is some case involved here assign flag=1
+and next time if flag=1 and if there is present t->left->left or t->left->right return false;
+3.after all sucessful completion loop return true.
+
+*/
+bool isCompleteBT(Node* root){
+        queue <Node*> q;
+       q.push(root);
+       int ended = 0;
+       while(!q.empty()){
+           Node * t = q.front();
+           q.pop();
+           //if (ended == 1 && (t->right)){
+           //    return 0;
+           //}
+           if (t->right){
+               if(!t->left){
+                   return 0;
+               }
+               else{ q.push(t->left);}
+               q.push(t->right);
+           }
+           
+           else if (t->left){ 
+               if (t->left->left ){
+                   return 0;
+               }
+               q.push(t->left);
+               ended =1;
+           }
+       }
+       return 1;
+        
+  
+    }
+    // time complexity O(n) and space complexity(N)for queue and O(logn) for stack space 
