@@ -1,0 +1,39 @@
+int palindromicPartition(string str)
+    {
+        int n=str.size();
+        bool b[n][n];
+        int cut[n][n];
+        // every 1 len char always pal 
+        for(int i=0; i<n; i++)
+        {
+            b[i][i]=1;
+            cut[i][i]=0;
+        }
+        for(int L=2; L<=n; L++)
+        {
+            for(int i=0; i<n-L+1; i++)
+            {
+                int j=i+L-1;
+                if(L==2)
+                b[i][j]=(str[i]==str[j]);
+                else
+                {
+                    b[i][j]=(str[i]==str[j] && b[i+1][j-1]);
+                }
+                if(b[i][j])
+                cut[i][j]=0;
+                else
+                {
+                cut[i][j]=INT_MAX;
+                for(int k=i; k<=j-1; k++)
+                {
+                    cut[i][j]=min(cut[i][j],cut[i][k]+cut[k+1][j]+1);
+                }
+                }
+            }
+            
+        }
+        return cut[0][n-1];
+        
+      
+    }
