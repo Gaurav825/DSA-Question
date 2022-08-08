@@ -17,3 +17,4 @@ int sqrtN(long long int N)
     }
     return e;
 }
+// Time Complexity O(logN)
