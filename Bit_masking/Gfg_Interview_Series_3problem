@@ -1,0 +1,32 @@
+ //https://practice.geeksforgeeks.org/contest/interview-series-63/problems/#
+ int generate_mask(string &s)
+  {
+      int mask=0;
+      for(char c:s)
+      {
+          int idx=c-'a';
+          mask^=(1<<idx);
+      }
+      return mask;
+  }
+    long long getNumGoodPair(int N, vector<string> &A) {
+        long long ans=0;
+        map<int,int>freq;
+        for(string s:A)
+        {
+            int mask=generate_mask(s);
+            ans+=freq[mask];
+            for(int i=0; i<26; i++)
+            {
+                int new_mask=mask^(1<<i);
+                ans+=freq[new_mask];
+            }
+            freq[mask]++;
+        }
+        return ans;
+        
+        
+        
+        
+        
+    }
