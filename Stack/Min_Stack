@@ -1,0 +1,50 @@
+//https://www.interviewbit.com/problems/min-stack/
+//https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/
+
+stack<long int>s;
+long int min_ele;
+MinStack::MinStack() {
+    while(s.size()>0)
+        s.pop();
+}
+
+void MinStack::push(int x) {
+    if(s.size()==0)   {
+        s.push(x);
+        min_ele=x;
+    }
+    else    {
+        if(min_ele<=x)   
+            s.push(x);
+        else{
+            s.push(2*x-min_ele);
+            min_ele=x;
+        }    
+    }
+}
+void MinStack::pop() {
+    if(s.size()==0)
+        return;
+    if(min_ele<=s.top())  {    
+    s.pop();
+    }
+    else{
+        min_ele=2*min_ele-s.top();
+        s.pop();
+    }
+}
+
+int MinStack::top() {
+    if(s.empty())
+        return -1;
+    if(min_ele>s.top())
+        return min_ele;
+    else
+        return s.top();
+    //return max(me,s.top());
+}
+int MinStack::getMin() {
+    if(s.size()==0)
+        return -1;
+    return min_ele;
+}
