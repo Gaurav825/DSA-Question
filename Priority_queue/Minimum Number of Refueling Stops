@@ -1,0 +1,38 @@
+/*
+The idea is very simple first start with starting fuel and then go upto that point can we reach destination if not than put all gas capacity present at each station with
+will came in the middle of upto reach point and take gas station maximum gas becuse car has infinite gas capacity and so on if we not reach destination 
+and our gas station will empty thn return -1 otherwise continue and return total station used to reach the destination
+*/
+
+
+
+
+
+
+int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
+       int n = stations.size();
+        
+        priority_queue<int> pq; 
+        int curr = startFuel;
+        int i = 0; //station index
+        int result = 0;
+        while(curr < target) { //until I reach my target
+            while(i < n && curr >= stations[i][0]) {
+                pq.push(stations[i][1]);
+				//Keep the station at top which can take me farthest (maximum gas)
+                i++;
+            }
+            
+            if(pq.empty()) //we can't move further now
+                return -1;
+            
+            int dist = pq.top();
+            pq.pop();
+            
+            curr += dist;
+            result++;
+        }
+        
+        return result; 
+        
+    }
