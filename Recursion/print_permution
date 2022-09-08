@@ -1,0 +1,21 @@
+
+#include <bits/stdc++.h>
+
+using namespace std;
+void perm(string s ,int l,int r)
+{
+    if(l==r)
+    cout<<s<<endl;
+    for(int i=l; i<=2; i++)
+    {
+        swap(s[l],s[i]);
+        perm(s,l+1,r);
+        swap(s[l],s[i]);
+    }
+}
+int main()
+{
+    string s="abc";
+    perm(s,0,2);
+    return 0;
+}
