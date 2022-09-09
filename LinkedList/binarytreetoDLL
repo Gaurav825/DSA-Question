@@ -1,0 +1,44 @@
+  void BinaryTree2DoubleLinkedList(Node* root, int &f,Node* &head, Node* &prev)
+{
+    // Base case
+    if (root == NULL)
+        return;
+ 
+    // Initialize previously visited node as NULL. This is
+    // static so that the same value is accessible in all
+    // recursive calls
+  
+ 
+    // Recursively convert left subtree
+    BinaryTree2DoubleLinkedList(root->left,f,head,prev);
+ 
+    // Now convert this node
+    if(f==0)
+    {
+        head=root;
+        prev=root;
+        f=1;
+    }
+    else
+    {
+        prev->right=root;
+        prev->right->left=prev;
+        prev=prev->right;
+        
+    }
+ 
+    // Finally convert right subtree
+    BinaryTree2DoubleLinkedList(root->right,f,head,prev);
+}
+    
+    //Function to convert binary tree to doubly linked list and return it.
+    Node * bToDLL(Node *root )
+    {
+        Node *head=nullptr;
+        Node *prev=nullptr;
+        int f=0;
+        BinaryTree2DoubleLinkedList(root,f,head,prev);
+        return head;
+        
+        
+    }
