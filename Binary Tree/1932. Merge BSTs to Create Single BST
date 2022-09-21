@@ -1,0 +1,31 @@
+bool traverse(TreeNode* r, unordered_map<int, TreeNode*> &m, int min_left = INT_MIN, int max_right = INT_MAX) {
+    if (r == nullptr) 
+        return true;
+    if (r->val <= min_left || r->val >= max_right)
+        return false;// not binary tree
+    if (r->left == r->right)
+    {// leaf node 
+        auto it = m.find(r->val);
+        if (it != end(m) && r != it->second) {
+            // merge leaf with root another tree
+            r->left = it->second->left;
+            r->right = it->second->right;
+            m.erase(it);// remove 
+        }
+    }
+    return traverse(r->left, m, min_left, r->val) && traverse(r->right, m, r->val, max_right);
+}    
+TreeNode* canMerge(vector<TreeNode*>& trees) {
+    unordered_map<int, TreeNode*> m;
+    unordered_map<int, int> cnt;
+    for (auto &t : trees) {
+        m[t->val] = t;
+        ++cnt[t->val];
+        ++cnt[t->left ? t->left->val : 0];
+        ++cnt[t->right ? t->right->val : 0];
+    }
+    for (auto &t : trees)
+        if (cnt[t->val] == 1)
+            return traverse(t, m) && m.size() == 1 ? t : nullptr;
+    return nullptr;
+}
