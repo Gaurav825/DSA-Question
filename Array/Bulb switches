@@ -1,0 +1,13 @@
+int bulbSwitch(int n) {
+        // every perpect square have one odd factor so odd factor integer bulb onn
+        int i=1;
+        int ans=0;
+        while(i*i<=n)
+        {
+            ans++;
+            i++;
+            
+        }
+        return ans;
+        
+    }
