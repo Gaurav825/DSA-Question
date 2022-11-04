@@ -1,0 +1,14 @@
+int maxProduct(vector<int>& nums) {
+        int n=nums.size();
+        int maxsum=nums[0];
+        int l=0,r=0;
+        for(int i=0; i<nums.size(); i++)
+        {
+            l=(l==0?1:l)*nums[i];// whenever 0 the it take 1
+            r=(r==0?1:r)*nums[n-i-1];// when 0 then it take 1
+            maxsum=max(maxsum,max(l,r));
+            
+            
+        }
+        return maxsum;
+    }
