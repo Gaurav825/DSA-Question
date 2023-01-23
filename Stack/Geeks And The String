@@ -1,0 +1,25 @@
+ string removePair(string s) {
+        // code here
+        stack<char>st;
+        for(char c:s)
+        {
+            if(st.empty()==false && st.top()==c)
+            {
+                st.pop();
+            }
+            else
+            {
+                st.push(c);
+            }
+        }
+        string str="";
+        while(st.empty()==false)
+        {
+            str+=st.top();
+            st.pop();
+        }
+        if(str.size()==0)
+        return "-1";
+        reverse(str.begin(),str.end());
+        return str;
+    }
