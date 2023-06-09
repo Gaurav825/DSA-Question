@@ -1,0 +1,34 @@
+//Q-> find the  total number of subarray whose sum is equal to k
+int subarraySum(vector<int>& arr, int k) {
+       unordered_map<int, int> prevSum;
+ 
+    int res = 0;
+ 
+    // Sum of elements so far.
+    int currSum = 0;
+ 
+    for (int i = 0; i < arr.size(); i++) {
+ 
+        // Add current element to sum so far.
+        currSum += arr[i];
+ 
+        // If currsum is equal to desired sum, then a new
+        // subarray is found. So increase count of
+        // subarrays.
+        if (currSum == k)
+            res++;
+ 
+        // currsum exceeds given sum by currsum  - sum. Find
+        // number of subarrays having this sum and exclude
+        // those subarrays from currsum by increasing count
+        // by same amount.
+        if (prevSum.find(currSum - k) != prevSum.end())
+            res += (prevSum[currSum - k]);
+ 
+        // Add currsum value to count of different values of
+        // sum.
+        prevSum[currSum]++;
+    }
+ 
+    return res;
+    }
