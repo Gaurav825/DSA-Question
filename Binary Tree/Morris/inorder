@@ -1,0 +1,37 @@
+https://leetcode.com/problems/binary-tree-inorder-traversal/submissions/
+vector<int> inorderTraversal(TreeNode* root) {
+        // moris inorder traversal 
+        TreeNode *curr=root;
+        vector<int>ans;
+        while(curr)
+        {
+            if(curr->left==nullptr)
+            {
+                ans.push_back(curr->val);
+                curr=curr->right;
+            }
+            else
+            {
+                TreeNode *prev=curr->left;
+                while(prev->right!=nullptr && prev->right!=curr)
+                {
+                    prev=prev->right;
+                }
+                if(prev->right==nullptr)
+                {
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+                else
+                {
+                    prev->right=nullptr;
+                    ans.push_back(curr->val);
+                    curr=curr->right;
+                }
+                
+            }
+            
+        }
+        return ans;
+        
+    }
