@@ -1,0 +1,34 @@
+vector<int> preorderTraversal(TreeNode* root) {
+vector<int>ans;
+while(root)
+{
+     if(root->left==nullptr)
+     {
+         ans.push_back(root->val);
+         root=root->right;
+      }
+     else
+     {
+          TreeNode *prev=root->left;
+          while(prev->right!=nullptr && prev->right!=root)
+         {
+             prev=prev->right;
+         }
+         if(prev->right==nullptr)
+          {
+                  prev->right=root;
+                 ans.push_back(root->val);
+                 root=root->left;
+          }
+         else
+       {
+           prev->right=nullptr;
+           root=root->right;
+        }
+
+   }
+}
+return ans;
+
+        
+    }
