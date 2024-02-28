@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<int>nums={4,3,2,1};
+    int len = nums.size();
+    map<int, int> map; 
+    for (int i = 0; i < len; i++) 
+        map[nums[i]] = i; 
+  
+    sort(nums.begin(), nums.end()); 
+    bool visited[len] = { 0 }; 
+  
+    
+    int ans = 0; 
+    for (int i = 0; i < len; i++) { 
+        if (visited[i] || map[nums[i]] == i) 
+            continue; 
+  
+        int j = i, cycle_size = 0; 
+        while (!visited[j]) { 
+            visited[j] = true; 
+            j = map[nums[j]]; 
+            cycle_size++; 
+        } 
+  
+       
+        if (cycle_size > 0) { 
+            ans += (cycle_size - 1); 
+        } 
+    } 
+    cout<<ans; 
+    
+    
+    
+
+    return 0;
+}
